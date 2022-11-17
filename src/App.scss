@@ -1,0 +1,38 @@
+h1 {
+  text-align: center;
+}
+
+.Login {
+  position: relative;
+  // border: 2px solid blue;
+  margin: 50px;
+}
+
+.LoginForm {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+  padding: 20px;
+  width: 35%;
+  // border: 2px solid orange;
+  /* centering */
+  left: 50%;
+  transform: translateX(-50%);
+
+  label {
+    margin-bottom: 8px;
+  }
+  input {
+    margin-bottom: 30px;
+    height: 25px;
+  }
+
+  button {
+    background: blue;
+    border-radius: 3px;
+    color: white;
+    font-size: 1.25rem;
+    height: 35px;
+  }
+}
