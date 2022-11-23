@@ -1,47 +1,33 @@
 // import { useState } from 'react';
 
 const ListItem = ({
-  todo,
+  item,
   id,
+  todos,
+  setTodos,
   deleteTodo,
   editTodo,
   saveTodo,
   newTodo,
   setNewTodo,
 }) => {
-  if (todo.isActive) {
-    return (
-      <li className='ListItem' id={id}>
-        <form onSubmit={() => saveTodo(id)}>
-          <input
-            defaultValue={newTodo.Value}
-            onChange={(e) => setNewTodo({ ...newTodo, value: e.target.value })}
-            minLength={1}
-            maxLength={25}
-          />
-          <button type='submit' className='save-button'>
-            Save
-          </button>
-        </form>
-      </li>
-    );
-  } else {
-    return (
-      <li className='ListItem' id={id}>
-        {todo.value}
+  return (
+    <li className='ListItem' id={id}>
+      {item.value}
+      <div>
         <button
           type='submit'
           className='edit-button'
-          onChange={editTodo}
+          onClick={(e) => editTodo(item.id)}
         ></button>
         <button
           type='submit'
           className='delete-button'
-          onChange={deleteTodo}
+          onClick={() => deleteTodo(item.id)}
         ></button>
-      </li>
-    );
-  }
+      </div>
+    </li>
+  );
 };
 
 export default ListItem;

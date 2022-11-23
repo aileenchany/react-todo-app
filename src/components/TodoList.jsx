@@ -1,31 +1,45 @@
 import ListItem from './ListItem';
+import ActiveListItem from './ActiveListItem';
 
 const TodoList = ({
   todos,
   setTodos,
-  newTodo,
-  setNewTodo,
+  todo,
+  setTodo,
   editTodo,
   deleteTodo,
   saveTodo,
+  editText,
+  setEditText,
 }) => {
+  const props = {
+    todos: todos,
+    setTodos: setTodos,
+    todo: todo,
+    setTodo: setTodo,
+    editTodo: editTodo,
+    deleteTodo: deleteTodo,
+    saveTodo: saveTodo,
+    editText: editText,
+    setEditText: setEditText,
+  };
   return (
     <ul className='TodoList'>
-      {todos &&
-        todos.map((todo, index) => {
+      {todos.map((todo) => {
+        if (todo.isActive) {
           return (
-            <ListItem
+            <ActiveListItem
               key={todo.id}
               id={todo.id}
-              todo={todo}
-              newTodo={newTodo}
-              setNewTodo={setNewTodo}
-              editTodo={editTodo}
-              deleteTodo={deleteTodo}
-              saveTodo={saveTodo}
+              item={todo}
+              setTodo={setTodo}
+              {...props}
             />
           );
-        })}
+        } else {
+          return <ListItem key={todo.id} id={todo.id} item={todo} {...props} />;
+        }
+      })}
     </ul>
   );
 };

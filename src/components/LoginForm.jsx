@@ -2,27 +2,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  /* testEmail & testPassword are for testing purposes only */
-  // const testEmail = 'test@rapptrlabs.com';
-  // const testPassword = 'Test123';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailErr, setEmailErr] = useState(false);
-  const [passwordErr, setPasswordErr] = useState(false);
+  // const [emailErr, setEmailErr] = useState(false);
+  // const [passwordErr, setPasswordErr] = useState(false);
   const [loginErr, setLoginErr] = useState(false);
   const [apiData, setApiData] = useState({});
   const navigate = useNavigate();
 
   const validateInputs = (e) => {
     e.preventDefault();
-    console.log(email, password);
 
     if (email && password) {
       //regex to validate email => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
-      //make a POST request to the API
+      //make a POST request to the API & send user input to the validated
       fetch('http://dev.rapptrlabs.com/Tests/scripts/user-login.php', {
         method: 'POST',
         headers: {
@@ -33,13 +29,14 @@ const LoginForm = () => {
         .then((res) => res.json())
         .then((resData) => {
           setApiData({ ...apiData, ...resData });
-          console.log(resData);
+          if (resData.user_email === email) {
+            navigate('/list');
+          }
         })
         .catch((err) => {
           console.log(err);
           setLoginErr(true);
         });
-      navigate('/list');
     }
   };
 
